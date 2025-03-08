@@ -1,36 +1,41 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Booking\Controllers\" />
-    <Folder Include="Areas\Booking\Data\" />
-    <Folder Include="Areas\Booking\Models\" />
-    <Folder Include="Areas\Booking\Views\" />
-    <Folder Include="Areas\Fare\Controllers\" />
-    <Folder Include="Areas\Fare\Data\" />
-    <Folder Include="Areas\Fare\Models\" />
-    <Folder Include="Areas\Fare\Views\" />
-    <Folder Include="Areas\Reports\Controllers\" />
-    <Folder Include="Areas\Reports\Data\" />
-    <Folder Include="Areas\Reports\Models\" />
-    <Folder Include="Areas\Reports\Views\" />
-    <Folder Include="Areas\Station\Controllers\" />
-    <Folder Include="Areas\Station\Data\" />
-    <Folder Include="Areas\Station\Models\" />
-    <Folder Include="Areas\Station\Views\" />
-    <Folder Include="Areas\Train\Controllers\" />
-    <Folder Include="Areas\Train\Data\" />
-    <Folder Include="Areas\Train\Models\" />
-    <Folder Include="Areas\Train\Views\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Areas\BookingArea\Controllers\" />
+		<Folder Include="Areas\BookingArea\Data\" />
+		<Folder Include="Areas\BookingArea\Models\" />
+		<Folder Include="Areas\BookingArea\Views\" />
+		<Folder Include="Areas\FareArea\Controllers\" />
+		<Folder Include="Areas\FareArea\Data\" />
+		<Folder Include="Areas\FareArea\Models\" />
+		<Folder Include="Areas\FareArea\Views\" />
+		<Folder Include="Areas\ReportsArea\Controllers\" />
+		<Folder Include="Areas\ReportsArea\Data\" />
+		<Folder Include="Areas\ReportsArea\Models\" />
+		<Folder Include="Areas\ReportsArea\Views\" />
+		<Folder Include="Areas\StationArea\Controllers\" />
+		<Folder Include="Areas\StationArea\Data\" />
+		<Folder Include="Areas\StationArea\Models\" />
+		<Folder Include="Areas\StationArea\Views\" />
+		<Folder Include="Areas\TrainsArea\Controllers\" />
+		<Folder Include="Areas\TrainsArea\Data\" />
+		<Folder Include="Areas\TrainsArea\Models\" />
+		<Folder Include="Areas\TrainsArea\Views\" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
+	</ItemGroup>
 
 </Project>

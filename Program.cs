@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using RailwayManagementSystem.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<RMSContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("RMSContext") ?? throw new InvalidOperationException("Connection string 'RMSContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -19,6 +24,13 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapStaticAssets();
+
+
+app.MapAreaControllerRoute(
+    name: "Trains",
+    areaName: "TrainsArea",
+    pattern: "TrainsArea/{controller=Trains}/{action=Index}/{id?}");
+
 
 app.MapControllerRoute(
     name: "default",
