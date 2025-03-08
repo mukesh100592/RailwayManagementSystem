@@ -31,6 +31,11 @@ app.MapAreaControllerRoute(
     areaName: "TrainsArea",
     pattern: "TrainsArea/{controller=Trains}/{action=Index}/{id?}");
 
+app.MapAreaControllerRoute(
+    name: "Stations",
+    areaName: "StationsArea",
+    pattern: "StationsArea/{controller=Stations}/{action=Index}/{id?}");
+
 
 app.MapControllerRoute(
     name: "default",

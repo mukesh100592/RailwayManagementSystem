@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using RailwayManagementSystem.Areas.TrainsArea.Models;
+using RailwayManagementSystem.Areas.StationsArea.Models;
 
 namespace RailwayManagementSystem.Data
 {
@@ -15,5 +16,6 @@ namespace RailwayManagementSystem.Data
         }
 
         public DbSet<Train> Train { get; set; } = default!;
+        public DbSet<Station> Station { get; set; } = default!;
     }
 }

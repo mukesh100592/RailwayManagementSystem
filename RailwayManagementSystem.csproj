@@ -7,26 +7,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="Areas\BookingArea\Controllers\" />
-		<Folder Include="Areas\BookingArea\Data\" />
-		<Folder Include="Areas\BookingArea\Models\" />
-		<Folder Include="Areas\BookingArea\Views\" />
-		<Folder Include="Areas\FareArea\Controllers\" />
-		<Folder Include="Areas\FareArea\Data\" />
-		<Folder Include="Areas\FareArea\Models\" />
-		<Folder Include="Areas\FareArea\Views\" />
-		<Folder Include="Areas\ReportsArea\Controllers\" />
-		<Folder Include="Areas\ReportsArea\Data\" />
-		<Folder Include="Areas\ReportsArea\Models\" />
-		<Folder Include="Areas\ReportsArea\Views\" />
-		<Folder Include="Areas\StationArea\Controllers\" />
-		<Folder Include="Areas\StationArea\Data\" />
-		<Folder Include="Areas\StationArea\Models\" />
-		<Folder Include="Areas\StationArea\Views\" />
-		<Folder Include="Areas\TrainsArea\Controllers\" />
-		<Folder Include="Areas\TrainsArea\Data\" />
-		<Folder Include="Areas\TrainsArea\Models\" />
-		<Folder Include="Areas\TrainsArea\Views\" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -1,5 +1,4 @@
-﻿@using RailwayManagementSystem.Areas.TrainsArea.Models
-@model IEnumerable<Train>
+﻿@model IEnumerable<RailwayManagementSystem.Areas.StationsArea.Models.Station>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -19,10 +18,7 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Capacity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Route)
+                @Html.DisplayNameFor(model => model.City)
             </th>
             <th></th>
         </tr>
@@ -34,10 +30,7 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Capacity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Route)
+                @Html.DisplayFor(modelItem => item.City)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
