@@ -25,14 +25,17 @@ app.UseAuthorization();
 
 app.MapStaticAssets();
 
-
 app.MapControllerRoute(
-    name: "Trains",
-    pattern: "{controller=Trains}/{action=Index}/{id?}");
+    name: "Home",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "Stations",
     pattern: "{controller=Stations}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "Trains",
+    pattern: "{controller=Trains}/{action=Index}/{id?}");
 
 
 app.MapControllerRoute(

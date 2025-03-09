@@ -31,10 +31,10 @@ drop Table Station
 go
 CREATE TABLE Station(
     Id int IDENTITY(1,1) PRIMARY KEY,
-    Name varchar(255) NOT NULL,
+    Code varchar(255) NOT NULL,
     City varchar(255) NOT NULL);
 GO
-INSERT INTO Station (Name, City) VALUES
+INSERT INTO Station (Code, City) VALUES
     ('NDLS','New Delhi'),
     ('CNB','Kanpur'),
     ('BNS','Banaras'),    
@@ -48,14 +48,15 @@ drop Table [User]
 go
 CREATE TABLE [User](
     Id int IDENTITY(1,1) PRIMARY KEY,
-    Name varchar(255) NOT NULL,
-    Email varchar(255) NOT NULL);
+    UserName varchar(255) NOT NULL,
+    Password varchar(255) NOT NULL,
+    IsActive bit Default 1);
 GO
-INSERT INTO [User] (Name, Email) VALUES
-    ('Krati','krati@gmail.com'),
-    ('Mukesh','mukesh@gmail.com'),
-    ('Test','test@gmail.com'),    
-    ('Admin','Admin@gmail.com');
+INSERT INTO [User] (UserName, Password) VALUES
+    ('Krati','krati@gmail'),
+    ('Mukesh','mukesh@gmail'),
+    ('Test','test@gmail'),    
+    ('Admin','Admin@gmail');
 GO
 select * from [User]
 GO
