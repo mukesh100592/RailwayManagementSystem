@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using RailwayManagementSystem.Areas.Trains.Models;
-using RailwayManagementSystem.Areas.Stations.Models;
+using RailwayManagementSystem.Models;
 
 namespace RailwayManagementSystem.Data
 {
@@ -17,5 +16,6 @@ namespace RailwayManagementSystem.Data
 
         public DbSet<Train> Train { get; set; } = default!;
         public DbSet<Station> Station { get; set; } = default!;
+        public DbSet<RailwayManagementSystem.Models.User> User { get; set; } = default!;
     }
 }

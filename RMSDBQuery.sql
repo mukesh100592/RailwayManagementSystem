@@ -41,5 +41,21 @@ INSERT INTO Station (Name, City) VALUES
     ('PNBE','Patna'),
     ('HWH','Kolkata');
 GO
-select * from Station
+select * from Station;
+GO
+
+drop Table [User]
+go
+CREATE TABLE [User](
+    Id int IDENTITY(1,1) PRIMARY KEY,
+    Name varchar(255) NOT NULL,
+    Email varchar(255) NOT NULL);
+GO
+INSERT INTO [User] (Name, Email) VALUES
+    ('Krati','krati@gmail.com'),
+    ('Mukesh','mukesh@gmail.com'),
+    ('Test','test@gmail.com'),    
+    ('Admin','Admin@gmail.com');
+GO
+select * from [User]
 GO

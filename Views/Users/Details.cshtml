@@ -1,4 +1,4 @@
-﻿@model RailwayManagementSystem.Areas.Stations.Models.Station
+﻿@model RailwayManagementSystem.Models.User
 
 @{
     ViewData["Title"] = "Details";
@@ -7,7 +7,7 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Station</h4>
+    <h4>User</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -17,10 +17,10 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.City)
+            @Html.DisplayNameFor(model => model.Email)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.City)
+            @Html.DisplayFor(model => model.Email)
         </dd>
     </dl>
 </div>

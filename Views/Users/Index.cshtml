@@ -1,16 +1,13 @@
-﻿@model IEnumerable<RailwayManagementSystem.Areas.Stations.Models.Station>
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@model IEnumerable<RailwayManagementSystem.Models.User>
+
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Users Information</h1>
 
 <p>
-    <a asp-controller="Stations" asp-action="Create">Create New</a>
-    <a href="/Stations/Create">Create New</a>
+    <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -19,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.City)
+                @Html.DisplayNameFor(model => model.Email)
             </th>
             <th></th>
         </tr>
@@ -31,13 +28,12 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.City)
+                @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                <a asp-controller="Stations" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                
             </td>
         </tr>
 }

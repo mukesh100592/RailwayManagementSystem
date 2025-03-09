@@ -6,27 +6,26 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RailwayManagementSystem.Data;
-using RailwayManagementSystem.Areas.Trains.Models;
+using RailwayManagementSystem.Models;
 
-namespace RailwayManagementSystem.Areas.Trains.Controllers
+namespace RailwayManagementSystem.Controllers
 {
-    [Area("Trains")]
-    public class TrainsController : Controller
+    public class StationsController : Controller
     {
         private readonly RMSContext _context;
 
-        public TrainsController(RMSContext context)
+        public StationsController(RMSContext context)
         {
             _context = context;
         }
 
-        // GET: Train/Trains
+        // GET: Stations/Stations
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Train.ToListAsync());
+            return View(await _context.Station.ToListAsync());
         }
 
-        // GET: Train/Trains/Details/5
+        // GET: Stations/Stations/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,39 +33,39 @@ namespace RailwayManagementSystem.Areas.Trains.Controllers
                 return NotFound();
             }
 
-            var train = await _context.Train
+            var station = await _context.Station
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (train == null)
+            if (station == null)
             {
                 return NotFound();
             }
 
-            return View(train);
+            return View(station);
         }
 
-        // GET: Train/Trains/Create
+        // GET: Stations/Stations/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Train/Trains/Create
+        // POST: Stations/Stations/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Capacity,Route")] Train train)
+        public async Task<IActionResult> Create([Bind("Id,Name,City")] Station station)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(train);
+                _context.Add(station);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(train);
+            return View(station);
         }
 
-        // GET: Train/Trains/Edit/5
+        // GET: Stations/Stations/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,22 +73,22 @@ namespace RailwayManagementSystem.Areas.Trains.Controllers
                 return NotFound();
             }
 
-            var train = await _context.Train.FindAsync(id);
-            if (train == null)
+            var station = await _context.Station.FindAsync(id);
+            if (station == null)
             {
                 return NotFound();
             }
-            return View(train);
+            return View(station);
         }
 
-        // POST: Train/Trains/Edit/5
+        // POST: Stations/Stations/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Capacity,Route")] Train train)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,City")] Station station)
         {
-            if (id != train.Id)
+            if (id != station.Id)
             {
                 return NotFound();
             }
@@ -98,12 +97,12 @@ namespace RailwayManagementSystem.Areas.Trains.Controllers
             {
                 try
                 {
-                    _context.Update(train);
+                    _context.Update(station);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TrainExists(train.Id))
+                    if (!StationExists(station.Id))
                     {
                         return NotFound();
                     }
@@ -114,10 +113,10 @@ namespace RailwayManagementSystem.Areas.Trains.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(train);
+            return View(station);
         }
 
-        // GET: Train/Trains/Delete/5
+        // GET: Stations/Stations/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -125,34 +124,34 @@ namespace RailwayManagementSystem.Areas.Trains.Controllers
                 return NotFound();
             }
 
-            var train = await _context.Train
+            var station = await _context.Station
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (train == null)
+            if (station == null)
             {
                 return NotFound();
             }
 
-            return View(train);
+            return View(station);
         }
 
-        // POST: Train/Trains/Delete/5
+        // POST: Stations/Stations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var train = await _context.Train.FindAsync(id);
-            if (train != null)
+            var station = await _context.Station.FindAsync(id);
+            if (station != null)
             {
-                _context.Train.Remove(train);
+                _context.Station.Remove(station);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TrainExists(int id)
+        private bool StationExists(int id)
         {
-            return _context.Train.Any(e => e.Id == id);
+            return _context.Station.Any(e => e.Id == id);
         }
     }
 }

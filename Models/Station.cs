@@ -1,4 +1,4 @@
-﻿namespace RailwayManagementSystem.Areas.Stations.Models
+﻿namespace RailwayManagementSystem.Models
 {
     public class Station
     {
