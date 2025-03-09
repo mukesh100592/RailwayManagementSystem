@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RailwayManagementSystem.Data;
-using RailwayManagementSystem.Areas.TrainsArea.Models;
+using RailwayManagementSystem.Areas.Trains.Models;
 
-namespace RailwayManagementSystem.Areas.TrainsArea.Controllers
+namespace RailwayManagementSystem.Areas.Trains.Controllers
 {
-    [Area("TrainsArea")]
+    [Area("Trains")]
     public class TrainsController : Controller
     {
         private readonly RMSContext _context;

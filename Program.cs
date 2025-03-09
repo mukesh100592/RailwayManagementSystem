@@ -28,13 +28,13 @@ app.MapStaticAssets();
 
 app.MapAreaControllerRoute(
     name: "Trains",
-    areaName: "TrainsArea",
-    pattern: "TrainsArea/{controller=Trains}/{action=Index}/{id?}");
+    areaName: "Trains",
+    pattern: "Trains/{controller=Trains}/{action=Index}/{id?}");
 
 app.MapAreaControllerRoute(
     name: "Stations",
-    areaName: "StationsArea",
-    pattern: "StationsArea/{controller=Stations}/{action=Index}/{id?}");
+    areaName: "Stations",
+    pattern: "Stations/{controller=Stations}/{action=Index}/{id?}");
 
 
 app.MapControllerRoute(

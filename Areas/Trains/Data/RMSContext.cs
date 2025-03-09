@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using RailwayManagementSystem.Areas.TrainsArea.Models;
-using RailwayManagementSystem.Areas.StationsArea.Models;
+using RailwayManagementSystem.Areas.Trains.Models;
+using RailwayManagementSystem.Areas.Stations.Models;
 
 namespace RailwayManagementSystem.Data
 {

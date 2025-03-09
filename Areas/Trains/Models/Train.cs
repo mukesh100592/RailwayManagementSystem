@@ -1,5 +1,5 @@
 
-namespace RailwayManagementSystem.Areas.TrainsArea.Models
+namespace RailwayManagementSystem.Areas.Trains.Models
 {
     public class Train
     {

@@ -10,8 +10,13 @@ CREATE TABLE Train(
     Id int IDENTITY(1,1) PRIMARY KEY,
     Name varchar(255) NOT NULL,
     Capacity int default 80 Not Null, --Max Seats 40
+    Type int default 0 Not Null, --0=Passenger, 1=Goods
     Route varchar(255) NOT NULL);
 GO
+ALTER TABLE Train DROP COLUMN Type;
+Go
+ALTER TABLE Train ADD Type int DEFAULT 0 Not Null;
+Go
 INSERT INTO Train (Name, Capacity,Route) VALUES
     ('Train 1',80 ,'Route 1'),
     ('Train 2',80 ,'Route 2'),
