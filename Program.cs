@@ -1,13 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using RailwayManagementSystem.Data;
+using RailwayManagementSystem.Services;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<RMSContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("RMSContext") ?? throw new InvalidOperationException("Connection string 'RMSContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddTransient<LoginService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -25,17 +26,17 @@ app.UseAuthorization();
 
 app.MapStaticAssets();
 
-app.MapControllerRoute(
-    name: "Home",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+//app.MapControllerRoute(
+//    name: "Home",
+//    pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.MapControllerRoute(
-    name: "Stations",
-    pattern: "{controller=Stations}/{action=Index}/{id?}");
+//app.MapControllerRoute(
+//    name: "Stations",
+//    pattern: "{controller=Stations}/{action=Index}/{id?}");
 
-app.MapControllerRoute(
-    name: "Trains",
-    pattern: "{controller=Trains}/{action=Index}/{id?}");
+//app.MapControllerRoute(
+//    name: "Trains",
+//    pattern: "{controller=Trains}/{action=Index}/{id?}");
 
 
 app.MapControllerRoute(

@@ -16,6 +16,6 @@ namespace RailwayManagementSystem.Data
 
         public DbSet<Train> Train { get; set; } = default!;
         public DbSet<Station> Station { get; set; } = default!;
-        public DbSet<RailwayManagementSystem.Models.User> User { get; set; } = default!;
+        public DbSet<User> User { get; set; } = default!;
     }
 }
