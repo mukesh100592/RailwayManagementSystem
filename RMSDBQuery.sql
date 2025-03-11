@@ -50,13 +50,14 @@ CREATE TABLE [User](
     Id int IDENTITY(1,1) PRIMARY KEY,
     UserName varchar(255) NOT NULL,
     Password varchar(255) NOT NULL,
-    IsActive bit Default 1);
+    IsActive bit Default 0,
+    IsAdmin bit Default 0);
 GO
-INSERT INTO [User] (UserName, Password) VALUES
-    ('Krati','krati@gmail'),
-    ('Mukesh','mukesh@gmail'),
-    ('Test','test@gmail'),    
-    ('Admin','Admin@gmail');
+INSERT INTO [User] (UserName, Password, IsAdmin) VALUES
+    ('Krati','krati@gmail',0),
+    ('Mukesh','mukesh@gmail',0),
+    ('Test','test@gmail',0),    
+    ('Admin','Admin@gmail',1);
 GO
 select * from [User]
 GO

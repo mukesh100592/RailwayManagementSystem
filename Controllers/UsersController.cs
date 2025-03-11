@@ -54,7 +54,7 @@ namespace RailwayManagementSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Username,Password/*,IsActive*/")] User user)
+        public async Task<IActionResult> Create([Bind("Id,Username,Password,IsActive")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace RailwayManagementSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Username,Password/*,IsActive*/")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Username,Password,IsActive")] User user)
         {
             if (id != user.Id)
             {
