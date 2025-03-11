@@ -5,10 +5,10 @@ using RailwayManagementSystem.Services;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<RMSContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("RMSContext") ?? throw new InvalidOperationException("Connection string 'RMSContext' not found.")));
+builder.Services.AddSingleton<LoginService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<LoginService>();
 
 var app = builder.Build();
 

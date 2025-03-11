@@ -1,5 +1,5 @@
-﻿@model RailwayManagementSystem.Models.BookingInfo
-
+﻿@using RailwayManagementSystem.Services
+@model RailwayManagementSystem.Models.BookingInfo
 @{
 	ViewData["Title"] = "Create";
 	var Stations = this.ViewContext.TempData["Stations"] as List<Station>;
@@ -44,15 +44,26 @@
 				<label asp-for="TicketFare" class="form-control" id="ticketFare" readonly />
 				<span asp-validation-for="TicketFare" class="text-danger"></span>
 			</div>
+
 			<div class="form-group">
-				<input type="submit" value="Book Now" class="btn btn-primary" />
+				@if (LoginService.IsLoggedIn)
+				{
+					<input type="submit" value="Book Now" class="btn btn-primary" />
+				}
+				else
+				{
+					<input type="submit" value="Book Now" class="btn btn-primary" disabled />
+				}
 			</div>
 		</form>
 	</div>
 </div>
 
 <div>
-	<a asp-action="Index">View Booked Tickets</a>
+	@if (LoginService.IsLoggedIn)
+	{
+		<a asp-action="Index">View Booked Tickets</a>
+	}
 </div>
 
 @section Scripts {
@@ -60,22 +71,22 @@
 		await Html.RenderPartialAsync("_ValidationScriptsPartial");
 	}
 	<script>
-			document.getElementById('sourceStation').addEventListener('change', calculateFare);
-			document.getElementById('destinationStation').addEventListener('change', calculateFare);
+		document.getElementById('sourceStation').addEventListener('change', calculateFare);
+		document.getElementById('destinationStation').addEventListener('change', calculateFare);
 
-			function calculateFare() {
-                var sourceStation = document.getElementById('sourceStation').value;
-                var destinationStation = document.getElementById('destinationStation').value;
+		function calculateFare() {
+			var sourceStation = document.getElementById('sourceStation').value;
+			var destinationStation = document.getElementById('destinationStation').value;
 
-                if (sourceStation && destinationStation) {
-                // Find the station ids and calculate the fare
-                var sourceStationId = parseInt(sourceStation);
-                var destinationStationId = parseInt(destinationStation);
-                var fare = Math.abs(sourceStationId - destinationStationId) * 100;
-                document.getElementById('ticketFare').value = fare;
-                } else {
-                document.getElementById('ticketFare').value = '';
-                }
+			if (sourceStation && destinationStation) {
+			// Find the station ids and calculate the fare
+			var sourceStationId = parseInt(sourceStation);
+			var destinationStationId = parseInt(destinationStation);
+			var fare = Math.abs(sourceStationId - destinationStationId) * 100;
+			document.getElementById('ticketFare').value = fare;
+			} else {
+			document.getElementById('ticketFare').value = '';
 			}
+		}
 	</script>
 }

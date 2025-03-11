@@ -56,7 +56,6 @@ namespace RailwayManagementSystem.Services
                 _context.Update(CurrentUser);
                 await _context.SaveChangesAsync();
             }
-
             return !IsLoggedIn;
         }
     }
