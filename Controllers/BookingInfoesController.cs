@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RailwayManagementSystem.Data;
 using RailwayManagementSystem.Models;
+using RailwayManagementSystem.Services;
 
 namespace RailwayManagementSystem.Controllers
 {
     public class BookingInfoesController : Controller
     {
         private readonly RMSContext _context;
+        private readonly LoginService _loginService;
         private List<Station> Stations { get; set; }
-        public BookingInfoesController(RMSContext context)
+        public BookingInfoesController(RMSContext context, LoginService loginService)
         {
             _context = context;
+            _loginService = loginService;
         }
 
         private async Task LoadStations()
@@ -28,7 +31,15 @@ namespace RailwayManagementSystem.Controllers
         // GET: BookingInfoes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.BookingInfo.ToListAsync());
+            if (LoginService.IsLoggedIn)
+            {
+                if (LoginService.IsAdmin)
+                {
+                    return View(await _context.BookingInfo.ToListAsync());
+                }
+                return View(await _context.BookingInfo.Where(b => b.UserId == _loginService.GetCurrentUserId()).ToListAsync());
+            }
+            return RedirectToAction("Create");
         }
 
         // GET: BookingInfoes/Details/5
@@ -65,6 +76,7 @@ namespace RailwayManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                bookingInfo.UserId = _context.User.FirstOrDefault(u => u.Username == LoginService.LoggedInUsername).Id;
                 _context.Add(bookingInfo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

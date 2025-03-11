@@ -1,44 +1,52 @@
-﻿@model IEnumerable<Station>
+﻿@using RailwayManagementSystem.Services
+@model IEnumerable<Station>
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @{
-    ViewData["Title"] = "Index";
+	ViewData["Title"] = "Index";
 }
 
 <h1>Stations Information</h1>
 
-<p>
-    <a asp-controller="Stations" asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Code)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.City)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Code)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                <a asp-controller="Stations" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                
-            </td>
-        </tr>
+@if (LoginService.IsAdmin)
+{
+	<p>
+		<a asp-controller="Stations" asp-action="Create">Add new Station</a>
+	</p>
 }
-    </tbody>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Code)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.City)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Code)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.City)
+				</td>
+				@if (LoginService.IsAdmin)
+				{
+					<td>
+						<a asp-controller="Stations" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+						<a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+						<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+
+					</td>
+				}
+			</tr>
+		}
+	</tbody>
 </table>

@@ -17,6 +17,7 @@ namespace RailwayManagementSystem.Models
         public string SourceStation { get; set; }
         public string DestinationStation { get; set; }
         public int TicketFare { get; set; }
+        public int UserId { get; set; }
         public bool BookingStatus { get; set; }
 
     }

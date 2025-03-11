@@ -70,7 +70,9 @@ CREATE TABLE [BookingInfo](
     SourceStation varchar(255) NOT NULL,
     DestinationStation varchar(255) NOT NULL,
     BookingStatus bit Default 1,
-    TicketFare int);
+    TicketFare int,
+    UserId int NOT NULL,
+    FOREIGN KEY (UserId) REFERENCES [User](Id));
 GO
 
 select * from [BookingInfo]
