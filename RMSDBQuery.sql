@@ -9,8 +9,8 @@ go
 CREATE TABLE Train(
     Id int IDENTITY(1,1) PRIMARY KEY,
     Name varchar(255) NOT NULL,
-    Capacity int default 80 Not Null, --Max Seats 40
-    Type int default 0 Not Null, --0=Passenger, 1=Goods
+    Capacity int default 80 Not Null, --Max Seats 80
+    Type int default 0 Not Null, --0=Passenger, 1=Cargo
     Route varchar(255) NOT NULL);
 GO
 ALTER TABLE Train DROP COLUMN Type;
@@ -59,4 +59,18 @@ INSERT INTO [User] (UserName, Password) VALUES
     ('Admin','Admin@gmail');
 GO
 select * from [User]
+GO
+
+drop Table [BookingInfo]
+go
+CREATE TABLE [BookingInfo](
+    Pnr int IDENTITY(1,1) PRIMARY KEY,
+    BookingDate DATETIME NOT NULL,
+    SourceStation varchar(255) NOT NULL,
+    DestinationStation varchar(255) NOT NULL,
+    BookingStatus bit Default 1,
+    TicketFare int);
+GO
+
+select * from [BookingInfo]
 GO

@@ -9,13 +9,14 @@ namespace RailwayManagementSystem.Data
 {
     public class RMSContext : DbContext
     {
-        public RMSContext (DbContextOptions<RMSContext> options)
+        public RMSContext(DbContextOptions<RMSContext> options)
             : base(options)
         {
         }
 
         public DbSet<Train> Train { get; set; } = default!;
         public DbSet<Station> Station { get; set; } = default!;
-        public DbSet<RailwayManagementSystem.Models.User> User { get; set; } = default!;
+        public DbSet<User> User { get; set; } = default!;
+        public DbSet<BookingInfo> BookingInfo { get; set; } = default!;
     }
 }

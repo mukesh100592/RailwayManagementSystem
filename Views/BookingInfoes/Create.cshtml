@@ -1,0 +1,81 @@
+﻿@model RailwayManagementSystem.Models.BookingInfo
+
+@{
+	ViewData["Title"] = "Create";
+	var Stations = this.ViewContext.TempData["Stations"] as List<Station>;
+}
+
+<h1>Book Ticket</h1>
+
+<hr />
+<div class="row">
+	<div class="col-md-4">
+		<form asp-action="Create">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				<label asp-for="BookingDate" class="control-label"></label>
+				<input asp-for="BookingDate" class="form-control" type="datetime-local" />
+				<span asp-validation-for="BookingDate" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="SourceStation" class="control-label"></label>
+				<select asp-for="SourceStation" class="form-control" id="sourceStation">
+					<option value="">Select Source Station</option>
+					@foreach (var station in @Stations)
+					{
+						<option value="@station.Id">@station.City</option>
+					}
+				</select>
+				<span asp-validation-for="SourceStation" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="DestinationStation" class="control-label"></label>
+				<select asp-for="DestinationStation" class="form-control" id="destinationStation">
+					<option value="">Select Destination Station</option>
+					@foreach (var station in @Stations)
+					{
+						<option value="@station.Id">@station.City</option>
+					}
+				</select>
+				<span asp-validation-for="DestinationStation" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="TicketFare" class="control-label"></label>
+				<label asp-for="TicketFare" class="form-control" id="ticketFare" readonly />
+				<span asp-validation-for="TicketFare" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Create" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
+</div>
+
+<div>
+	<a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+	<script>
+			document.getElementById('sourceStation').addEventListener('change', calculateFare);
+			document.getElementById('destinationStation').addEventListener('change', calculateFare);
+
+			function calculateFare() {
+                var sourceStation = document.getElementById('sourceStation').value;
+                var destinationStation = document.getElementById('destinationStation').value;
+
+                if (sourceStation && destinationStation) {
+                // Find the station ids and calculate the fare
+                var sourceStationId = parseInt(sourceStation);
+                var destinationStationId = parseInt(destinationStation);
+                var fare = Math.abs(sourceStationId - destinationStationId) * 100;
+                document.getElementById('ticketFare').value = fare;
+                } else {
+                document.getElementById('ticketFare').value = '';
+                }
+			}
+	</script>
+}

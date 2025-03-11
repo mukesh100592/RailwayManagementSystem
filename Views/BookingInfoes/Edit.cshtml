@@ -1,0 +1,54 @@
+﻿@model RailwayManagementSystem.Models.BookingInfo
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>BookingInfo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Pnr" />
+            <div class="form-group">
+                <label asp-for="BookingDate" class="control-label"></label>
+                <input asp-for="BookingDate" class="form-control" />
+                <span asp-validation-for="BookingDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SourceStation" class="control-label"></label>
+                <input asp-for="SourceStation" class="form-control" />
+                <span asp-validation-for="SourceStation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DestinationStation" class="control-label"></label>
+                <input asp-for="DestinationStation" class="form-control" />
+                <span asp-validation-for="DestinationStation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TicketFare" class="control-label"></label>
+                <input asp-for="TicketFare" class="form-control" />
+                <span asp-validation-for="TicketFare" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="BookingStatus" /> @Html.DisplayNameFor(model => model.BookingStatus)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

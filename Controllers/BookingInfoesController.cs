@@ -10,22 +10,28 @@ using RailwayManagementSystem.Models;
 
 namespace RailwayManagementSystem.Controllers
 {
-    public class UsersController : Controller
+    public class BookingInfoesController : Controller
     {
         private readonly RMSContext _context;
-
-        public UsersController(RMSContext context)
+        private List<Station> Stations { get; set; }
+        public BookingInfoesController(RMSContext context)
         {
             _context = context;
         }
 
-        // GET: Users
-        public async Task<IActionResult> Index()
+        private async Task LoadStations()
         {
-            return View(await _context.User.ToListAsync());
+            Stations = await _context.Station.ToListAsync();
+            TempData["Stations"] = Stations;
         }
 
-        // GET: Users/Details/5
+        // GET: BookingInfoes
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.BookingInfo.ToListAsync());
+        }
+
+        // GET: BookingInfoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +39,40 @@ namespace RailwayManagementSystem.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
+            var bookingInfo = await _context.BookingInfo
+                .FirstOrDefaultAsync(m => m.Pnr == id);
+            if (bookingInfo == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(bookingInfo);
         }
 
-        // GET: Users/Create
-        public IActionResult Create()
+        // GET: BookingInfoes/Create
+        public async Task<IActionResult> Create()
         {
+            await LoadStations();
             return View();
         }
 
-        // POST: Users/Create
+        // POST: BookingInfoes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Username,Password/*,IsActive*/")] User user)
+        public async Task<IActionResult> Create([Bind("Pnr,BookingDate,SourceStation,DestinationStation,TicketFare,BookingStatus")] BookingInfo bookingInfo)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(user);
+                _context.Add(bookingInfo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(bookingInfo);
         }
 
-        // GET: Users/Edit/5
+        // GET: BookingInfoes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +80,22 @@ namespace RailwayManagementSystem.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User.FindAsync(id);
-            if (user == null)
+            var bookingInfo = await _context.BookingInfo.FindAsync(id);
+            if (bookingInfo == null)
             {
                 return NotFound();
             }
-            return View(user);
+            return View(bookingInfo);
         }
 
-        // POST: Users/Edit/5
+        // POST: BookingInfoes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Username,Password/*,IsActive*/")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Pnr,BookingDate,SourceStation,DestinationStation,TicketFare,BookingStatus")] BookingInfo bookingInfo)
         {
-            if (id != user.Id)
+            if (id != bookingInfo.Pnr)
             {
                 return NotFound();
             }
@@ -97,12 +104,12 @@ namespace RailwayManagementSystem.Controllers
             {
                 try
                 {
-                    _context.Update(user);
+                    _context.Update(bookingInfo);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.Id))
+                    if (!BookingInfoExists(bookingInfo.Pnr))
                     {
                         return NotFound();
                     }
@@ -113,10 +120,10 @@ namespace RailwayManagementSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(bookingInfo);
         }
 
-        // GET: Users/Delete/5
+        // GET: BookingInfoes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,34 +131,34 @@ namespace RailwayManagementSystem.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
+            var bookingInfo = await _context.BookingInfo
+                .FirstOrDefaultAsync(m => m.Pnr == id);
+            if (bookingInfo == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(bookingInfo);
         }
 
-        // POST: Users/Delete/5
+        // POST: BookingInfoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var user = await _context.User.FindAsync(id);
-            if (user != null)
+            var bookingInfo = await _context.BookingInfo.FindAsync(id);
+            if (bookingInfo != null)
             {
-                _context.User.Remove(user);
+                _context.BookingInfo.Remove(bookingInfo);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UserExists(int id)
+        private bool BookingInfoExists(int id)
         {
-            return _context.User.Any(e => e.Id == id);
+            return _context.BookingInfo.Any(e => e.Pnr == id);
         }
     }
 }
