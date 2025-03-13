@@ -10,6 +10,10 @@ using RailwayManagementSystem.Models;
 
 namespace RailwayManagementSystem.Controllers
 {
+    /// <summary>
+    /// Stations controller
+    /// </summary>
+    [Route("Stations")]
     public class StationsController : Controller
     {
         private readonly RMSContext _context;
@@ -20,12 +24,14 @@ namespace RailwayManagementSystem.Controllers
         }
 
         // GET: Stations/Stations
+        [HttpGet("")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Station.ToListAsync());
         }
 
         // GET: Stations/Stations/Details/5
+        [HttpGet("Details/{id}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,6 +50,7 @@ namespace RailwayManagementSystem.Controllers
         }
 
         // GET: Stations/Stations/Create
+        [HttpGet("Create")]
         public IActionResult Create()
         {
             return View();
@@ -52,9 +59,10 @@ namespace RailwayManagementSystem.Controllers
         // POST: Stations/Stations/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        // POST: Stations/Stations/Create
+        [HttpPost("Create")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Code,City")] Station station)
+        public async Task<IActionResult> Create([Bind("Id,Code,City,Longitude,Latitude")] Station station)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +73,9 @@ namespace RailwayManagementSystem.Controllers
             return View(station);
         }
 
+
         // GET: Stations/Stations/Edit/5
+        [HttpGet("Edit/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -84,9 +94,9 @@ namespace RailwayManagementSystem.Controllers
         // POST: Stations/Stations/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost("Edit/{id}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Code,City")] Station station)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Code,City,Longitude,Latitude")] Station station)
         {
             if (id != station.Id)
             {
@@ -117,6 +127,7 @@ namespace RailwayManagementSystem.Controllers
         }
 
         // GET: Stations/Stations/Delete/5
+        [HttpGet("Delete/{id}")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,7 +146,7 @@ namespace RailwayManagementSystem.Controllers
         }
 
         // POST: Stations/Stations/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost("Delete/{id}"), ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

@@ -10,6 +10,9 @@ using RailwayManagementSystem.Models;
 
 namespace RailwayManagementSystem.Controllers
 {
+    /// <summary>
+    /// users controller
+    /// </summary>
     public class UsersController : Controller
     {
         private readonly RMSContext _context;

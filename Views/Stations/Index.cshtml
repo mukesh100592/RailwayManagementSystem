@@ -24,6 +24,12 @@
 			<th>
 				@Html.DisplayNameFor(model => model.City)
 			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Longitude)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Latitude)
+			</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -36,6 +42,12 @@
 				</td>
 				<td>
 					@Html.DisplayFor(modelItem => item.City)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Longitude)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Latitude)
 				</td>
 				@if (LoginService.IsAdmin)
 				{

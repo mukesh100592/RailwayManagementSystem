@@ -11,6 +11,9 @@ using RailwayManagementSystem.Services;
 
 namespace RailwayManagementSystem.Controllers
 {
+    /// <summary>
+    /// Controller for Booking infoes page
+    /// </summary>
     public class BookingInfoesController : Controller
     {
         private readonly RMSContext _context;
@@ -76,7 +79,8 @@ namespace RailwayManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                bookingInfo.UserId = _context.User.FirstOrDefault(u => u.Username == LoginService.LoggedInUsername).Id;
+                //assigning the bookingInfo.UserId to the current logged in user id
+                bookingInfo.UserId = _loginService.GetCurrentUserId();
                 _context.Add(bookingInfo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

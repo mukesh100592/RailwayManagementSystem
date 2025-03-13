@@ -32,14 +32,16 @@ go
 CREATE TABLE Station(
     Id int IDENTITY(1,1) PRIMARY KEY,
     Code varchar(255) NOT NULL,
-    City varchar(255) NOT NULL);
+    City varchar(255) NOT NULL,
+    Longitude real,
+    Latitude real);
 GO
-INSERT INTO Station (Code, City) VALUES
-    ('NDLS','New Delhi'),
-    ('CNB','Kanpur'),
-    ('BNS','Banaras'),    
-    ('PNBE','Patna'),
-    ('HWH','Kolkata');
+INSERT INTO Station (Code, City, Latitude,Longitude) VALUES
+    ('NDLS','New Delhi', 28.70405920 ,77.10249020 ),
+    ('CNB','Kanpur',  26.46523000, 80.34975000 ),
+    ('BNS','Banaras',25.321684, 82.987289),    
+    ('PNBE','Patna', 25.41667000, 85.16667000 ),
+    ('HWH','Kolkata', 22.54111111, 88.33777778 );
 GO
 select * from Station;
 GO
