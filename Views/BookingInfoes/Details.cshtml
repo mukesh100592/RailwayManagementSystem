@@ -39,6 +39,14 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.BookingStatus)
+            @if (Model.BookingStatus)
+            {
+                <label>Booked</label>
+            }
+            else
+            {
+                <label>Cancelled</label>
+            }
         </dd>
     </dl>
 </div>

@@ -19,6 +19,7 @@ namespace RailwayManagementSystem.Controllers
         private readonly RMSContext _context;
         private readonly LoginService _loginService;
         private List<Station> Stations { get; set; }
+        private static BookingInfo BookingInfoInEdit { get; set; }
         public BookingInfoesController(RMSContext context, LoginService loginService)
         {
             _context = context;
@@ -81,6 +82,7 @@ namespace RailwayManagementSystem.Controllers
             {
                 //assigning the bookingInfo.UserId to the current logged in user id
                 bookingInfo.UserId = _loginService.GetCurrentUserId();
+                bookingInfo.BookingStatus = true;
                 _context.Add(bookingInfo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -101,6 +103,7 @@ namespace RailwayManagementSystem.Controllers
             {
                 return NotFound();
             }
+            BookingInfoInEdit = bookingInfo;
             return View(bookingInfo);
         }
 
@@ -120,6 +123,7 @@ namespace RailwayManagementSystem.Controllers
             {
                 try
                 {
+                    bookingInfo.UserId = BookingInfoInEdit.UserId;
                     _context.Update(bookingInfo);
                     await _context.SaveChangesAsync();
                 }
@@ -165,7 +169,9 @@ namespace RailwayManagementSystem.Controllers
             var bookingInfo = await _context.BookingInfo.FindAsync(id);
             if (bookingInfo != null)
             {
-                _context.BookingInfo.Remove(bookingInfo);
+                bookingInfo.BookingStatus = false;
+                _context.Update(bookingInfo);
+                //_context.BookingInfo.Remove(bookingInfo);//do not remove the entry from database, only change booking status
             }
 
             await _context.SaveChangesAsync();

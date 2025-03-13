@@ -1,59 +1,80 @@
 ﻿@model IEnumerable<RailwayManagementSystem.Models.BookingInfo>
-
+@using RailwayManagementSystem.Services;
 @{
-    ViewData["Title"] = "Index";
+	ViewData["Title"] = "Index";
 }
 
 <h1>Booked Tickets</h1>
 
 <p>
-    <a asp-action="Create">Book a new ticket</a>
+	<a asp-action="Create">Book a new ticket</a>
 </p>
 <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.BookingDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SourceStation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DestinationStation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TicketFare)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BookingStatus)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookingDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SourceStation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DestinationStation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TicketFare)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookingStatus)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Pnr">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Pnr">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Pnr">Cancel ticket</a>
-            </td>
-        </tr>
-}
-    </tbody>
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.BookingDate)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.SourceStation)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.DestinationStation)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.TicketFare)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.BookingStatus)
+			</th>
+			@if (LoginService.IsAdmin)
+			{
+				<th>
+					User Name
+				</th>
+			}
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.BookingDate)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.SourceStation)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.DestinationStation)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.TicketFare)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.BookingStatus)
+					@if (item.BookingStatus)
+					{
+						<label>Booked</label>
+					}
+					else
+					{
+						<label>Cancelled</label>
+					}
+				</td>
+				@if (LoginService.IsAdmin)
+				{
+					<td>
+						@LoginService.GetUserName(item.UserId)
+					</td>
+				}
+				<td>
+					<a asp-action="Edit" asp-route-id="@item.Pnr">Edit</a> |
+					<a asp-action="Details" asp-route-id="@item.Pnr">Details</a> |
+					<a asp-action="Delete" asp-route-id="@item.Pnr">Cancel ticket</a>
+				</td>
+			</tr>
+		}
+	</tbody>
 </table>

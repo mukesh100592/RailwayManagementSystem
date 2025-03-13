@@ -7,6 +7,7 @@ namespace RailwayManagementSystem.Services
     public class LoginService
     {
         private RMSContext _context;
+        private static Dictionary<int, string> _userNames = new Dictionary<int, string>();
 
         public LoginService()
         {
@@ -36,12 +37,18 @@ namespace RailwayManagementSystem.Services
                 IsAdmin = CurrentUser.IsAdmin;
                 _context.Update(CurrentUser);
                 await _context.SaveChangesAsync();
+                LoadUserNames();
             }
             else
             {
                 IsLoggedIn = false;
             }
             return IsLoggedIn;
+        }
+
+        private void LoadUserNames()
+        {
+            _userNames = _context.User.ToDictionary(u => u.Id, u => u.Username);
         }
 
         public async Task<bool> Logout()
@@ -58,5 +65,13 @@ namespace RailwayManagementSystem.Services
             }
             return !IsLoggedIn;
         }
+
+        public static string GetUserName(int userId)
+        {
+            var user = _userNames.FirstOrDefault(u => u.Key == userId);
+            return user.Value != null ? user.Value : "Unknown User";
+        }
+
+
     }
 }
